@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,8 +25,6 @@
       --text:#eaf3ff;
       --card-2:#071428;
     }
-
-    html[data-theme="light"]{ --bg-1:#f7fbff; --bg-2:#eaf6ff; --card:#ffffff; --muted:#51657a; --accent:#0066cc; --accent-2:#00b3a6; --text:#07203a; color-scheme:light }
 
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:radial-gradient(1200px 400px at 10% 10%, rgba(6,38,77,0.18), transparent), linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--text);min-height:100vh}
@@ -119,7 +117,6 @@
           <a class="icon-btn" href="https://leetcode.com/u/llukito/" target="_blank" rel="noopener noreferrer">LeetCode</a>
         </nav>
 
-        <button id="themeToggle" class="icon-btn" aria-pressed="false" title="Toggle dark mode">🌙</button>
         <a class="primary-btn" href="Luka_Aladashvili_CV.pdf" download>Download CV</a>
       </div>
     </header>
@@ -289,17 +286,6 @@
   </div>
 
   <script>
-    // Theme toggle
-    const root = document.documentElement;
-    const toggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if(saved) root.setAttribute('data-theme', saved);
-    toggle.addEventListener('click', () => {
-      const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', cur);
-      localStorage.setItem('theme', cur);
-      toggle.textContent = cur === 'dark' ? '🌙' : '☀️';
-    });
 
     // Modal data (project info stored here)
     const projects = {
@@ -389,6 +375,7 @@
   </script>
 </body>
 </html>
+
 
 
 
