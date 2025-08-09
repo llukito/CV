@@ -1,345 +1,386 @@
-<!--
-README / Deployment Notes (short)
-
-Files to include in the GitHub Pages repo (root):
-- index.html (this file)
-- Luka_Aladashvili_CV.pdf  <-- your CV PDF (already uploaded in conversation; add to repo)
-- assets/profile.jpg        <-- your profile photo file (rename/upload the photo to this path)
-- (optional) assets/projects/*.png  <-- project screenshots (optional)
-
-How to publish on GitHub Pages (quick):
-1. Create a new repository on GitHub (e.g., `cv` or `portfolio`).
-2. Clone locally, copy this index.html and the files above into the repository root.
-3. Commit and push to the `main` branch.
-4. In repository Settings -> Pages -> choose branch `main` (root) -> Save.
-5. Your site will be available at: `https://<your-username>.github.io/<repo>` (wait a minute to build).
-
-Editing content:
-- All personal data (name, hero text, contact links, project entries) appear below in clear HTML sections.
-- To change featured projects, edit the <section id="featured-projects"> cards.
-- To add screenshots, place images in `assets/projects/` and replace the `img` src values.
-
-If you want me to also create a simple Git commit + push script or a ready-made repo, tell me and I can generate it.
--->
-
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Luka Aladashvili — Software Engineer</title>
   <meta name="description" content="Luka Aladashvili — Software Engineer. Backend, AI, C++, Java, Python. Based in Tbilisi.">
-  <meta property="og:title" content="Luka Aladashvili — Software Engineer">
-  <meta property="og:description" content="Backend systems, LLMs, algorithms, and applied AI. View projects and download CV.">
-  <meta property="og:type" content="website">
 
-  <!-- Google Font: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f7fbff;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0066cc; /* bluish */
-      --accent-2:#00b3a6; /* teal */
-      --glass: rgba(255,255,255,0.7);
+      --bg-1: #051025; /* dark-blue base */
+      --bg-2: #032b5c; /* bluish gradient */
+      --card:#0b1220;
+      --muted:#9aa7bf;
+      --accent:#66b2ff; /* bright bluish */
+      --accent-2:#00d1c1; /* teal */
+      --glass: rgba(255,255,255,0.04);
       --radius:14px;
-      --maxw:1100px;
-      --sidebar-w:320px;
-      --transition:250ms ease;
-      color-scheme: light;
+      --maxw:1200px;
+      --sidebar-w:340px;
+      --transition:220ms ease;
+      color-scheme: dark;
+      --text:#eaf3ff;
+      --card-2:#071428;
     }
+
+    html[data-theme="light"]{ --bg-1:#f7fbff; --bg-2:#eaf6ff; --card:#ffffff; --muted:#51657a; --accent:#0066cc; --accent-2:#00b3a6; --text:#07203a; color-scheme:light }
+
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:var(--bg); color:#0f172a}
-    a{color:var(--accent);text-decoration:none}
-    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:radial-gradient(1200px 400px at 10% 10%, rgba(6,38,77,0.18), transparent), linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--text);min-height:100vh}
+    a{color:var(--accent)}
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:28px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand .photo{width:72px;height:72px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.06)}
+    .brand .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .brand h1{margin:0;font-size:20px}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+    .controls{display:flex;align-items:center;gap:10px}
+    .social{display:flex;gap:8px}
+    .icon-btn{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:8px 12px;border-radius:10px;color:var(--text);border:1px solid rgba(255,255,255,0.03);font-weight:600;text-decoration:none}
+    .primary-btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031726;padding:10px 14px;border-radius:12px;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(0,110,200,0.18)}
 
     /* layout */
-    .grid{display:grid;grid-template-columns:var(--sidebar-w) 1fr;gap:24px}
-    @media (max-width:880px){.grid{grid-template-columns:1fr}}
-    .sidebar{background:linear-gradient(180deg,var(--card),#f4fbff);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(10,20,30,0.06)}
-    .main{padding:20px;border-radius:12px;background:transparent}
+    .grid{display:grid;grid-template-columns:var(--sidebar-w) 1fr;gap:22px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-    /* profile */
-    .photo{width:110px;height:110px;border-radius:20px;overflow:hidden;display:block;margin:0 auto;border:4px solid rgba(0,0,0,0.04)}
-    .photo img{width:100%;height:100%;object-fit:cover;display:block}
-    h1{font-size:20px;margin:14px 0 4px;text-align:center}
-    .title{font-weight:600;text-align:center;color:#042c54}
-    .tag{display:block;text-align:center;color:var(--muted);font-size:13px;margin-top:6px}
+    /* sidebar */
+    aside{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    aside h3{margin:0 0 10px 0;color:var(--accent);font-size:13px}
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    .small{font-size:13px;color:var(--muted)}
 
-    /* contact */
-    .icons{display:flex;gap:10px;justify-content:center;margin-top:12px}
-    .icons a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,0.02);font-size:13px}
+    /* skills chips */
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+    .chip strong{color:var(--text);display:block;font-weight:700}
 
-    /* skills */
-    .section{margin-bottom:18px}
-    .section h3{font-size:13px;margin:0 0 8px;color:#06315f}
-    .skill{font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
-    .bar{height:8px;background:#e6f3ff;border-radius:8px;margin-top:8px;overflow:hidden}
-    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));}
+    /* main */
+    main{padding:8px}
+    .section{margin-bottom:20px}
+    h2.section-title{display:flex;align-items:center;gap:10px;margin:0 0 12px 0}
+    .lead{color:var(--muted);margin:6px 0 0 0}
 
-    /* main content */
-    .hero{display:flex;align-items:flex-start;gap:18px}
-    @media (max-width:880px){.hero{flex-direction:column;align-items:center;text-align:center}}
-    .hero h2{margin:0;font-size:26px}
-    .hero p{margin:8px 0;color:var(--muted)}
-    .cta{display:inline-flex;gap:10px;margin-top:12px}
-    .btn{padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600;border:none;cursor:pointer}
-    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(0,102,204,0.12)}
+    /* projects grid */
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:1100px){.projects{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){.projects{grid-template-columns:1fr}}
 
-    /* projects */
-    .featured{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-    @media(max-width:1100px){.featured{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:700px){.featured{grid-template-columns:1fr}}
-    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(12,20,30,0.04);display:flex;flex-direction:column;gap:10px}
-    .card .meta{font-size:12px;color:var(--muted)}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag-pill{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(0,0,0,0.04)}
-    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-    @media(max-width:1100px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:700px){.projects-grid{grid-template-columns:1fr}}
+    .project-card{background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,0.02));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)}
+    .project-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,30,86,0.25)}
+    .project-card .title{font-weight:700}
+    .project-card .meta{font-size:12px;color:var(--muted)}
 
-    /* small helpers */
-    .muted{color:var(--muted);font-size:13px}
-    .section hr{border:0;border-top:1px solid rgba(10,20,30,0.04);margin:12px 0}
-    details{background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.6));padding:12px;border-radius:10px}
+    .tag-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
 
-    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+    .card-actions{display:flex;gap:8px;margin-top:auto}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:linear-gradient(180deg,rgba(1,6,20,0.6),rgba(1,6,20,0.8));display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+    .modal{width:100%;max-width:960px;background:linear-gradient(180deg,#03182a,#07233a);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .modal .row{display:flex;gap:16px}
+    .modal img{width:320px;height:200px;object-fit:cover;border-radius:8px}
+    .modal .desc{flex:1}
+
+    /* achievements */
+    details[open] summary::after{content:" ▲"}
+    details summary::after{content:" ▼";font-size:12px;color:var(--muted);margin-left:8px}
+    details{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted)}
+
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="grid">
-      <!-- SIDEBAR -->
-      <aside class="sidebar" aria-label="Sidebar">
-        <div style="display:flex;flex-direction:column;align-items:center">
-          <div class="photo" aria-hidden="false">
-            <img src="personalPhoto.png" alt="Photo of Luka Aladashvili">
-          </div>
+    <header>
+      <div class="brand">
+        <div class="photo">
+          <img src="assets/profile.jpg" alt="Luka Aladashvili" onerror="this.onerror=null;this.src='personalPhoto.png'">
+        </div>
+        <div>
           <h1>Luka Aladashvili</h1>
-          <div class="title">Software Engineer — Backend & AI · C++, Java, Python</div>
-          <div class="tag">Tbilisi, Georgia · Open to remote freelance</div>
+          <p class="small">Software Engineer — Backend & AI · C++, Java, Python · Tbilisi</p>
+        </div>
+      </div>
 
-          <div class="icons" style="margin-top:12px">
-            <a href="mailto:luka.aladashvili.work@gmail.com" title="Email" aria-label="Email">✉️ luka.aladashvili.work@gmail.com</a>
+      <div class="controls">
+        <nav class="social" aria-label="social links">
+          <a class="icon-btn" href="https://github.com/llukito" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/luka-aladashvili/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="icon-btn" href="https://leetcode.com/u/llukito/" target="_blank" rel="noopener noreferrer">LeetCode</a>
+        </nav>
+
+        <button id="themeToggle" class="icon-btn" aria-pressed="false" title="Toggle dark mode">🌙</button>
+        <a class="primary-btn" href="Luka_Aladashvili_CV.pdf" download>Download CV</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside>
+        <h3>Contact</h3>
+        <div class="contact-list">
+          <div class="small">✉️ <a href="mailto:luka.aladashvili.work@gmail.com" style="color:var(--muted);">luka.aladashvili.work@gmail.com</a></div>
+          <div class="small">📍 Tbilisi, Georgia</div>
+        </div>
+
+        <hr style="opacity:0.06;margin:14px 0">
+
+        <h3>Languages</h3>
+        <div class="chips">
+          <div class="chip"><strong>Georgian</strong><span style="opacity:0.75">Native</span></div>
+          <div class="chip"><strong>English</strong><span style="opacity:0.75">C1</span></div>
+          <div class="chip"><strong>German</strong><span style="opacity:0.75">Conversational</span></div>
+          <div class="chip"><strong>Russian</strong><span style="opacity:0.75">A2</span></div>
+        </div>
+
+        <hr style="opacity:0.06;margin:14px 0">
+
+        <h3>Skills</h3>
+        <div class="chips" aria-hidden="false">
+          <div class="chip">C++</div>
+          <div class="chip">Java</div>
+          <div class="chip">Python</div>
+          <div class="chip">FastAPI</div>
+          <div class="chip">AWS</div>
+          <div class="chip">PostgreSQL</div>
+          <div class="chip">LLMs</div>
+          <div class="chip">Algorithms</div>
+        </div>
+
+        <hr style="opacity:0.06;margin:14px 0">
+
+        <h3>Education</h3>
+        <div class="small"><strong>Free University of Tbilisi</strong><br>Mathematics & Computer Science (2024–2028)</div>
+        <div style="height:10px"></div>
+        <div class="small"><strong>Georgian-American School</strong><br>High School (STEM)</div>
+
+        <hr style="opacity:0.06;margin:14px 0">
+
+        <h3>Achievements</h3>
+        <details>
+          <summary class="small">View achievements</summary>
+          <div style="margin-top:10px">
+            <ul class="small">
+              <li>1st Place — Bank of Georgia STEM Competition</li>
+              <li>Top Scorer — Unified National Exams (Full Academic Grant)</li>
+              <li>SAT 1490 · NMSQT 1430 · PSAT 1400</li>
+              <li>Cambridge English: FCE (C1)</li>
+              <li>Multiple competitive programming & hackathon wins</li>
+            </ul>
           </div>
-
-          <div class="icons" style="margin-top:10px">
-            <a href="https://www.linkedin.com/in/luka-aladashvili/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/llukito" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://leetcode.com/u/llukito/" target="_blank" rel="noopener noreferrer">LeetCode</a>
-          </div>
-
-        </div>
-
-        <hr style="margin:16px 0">
-
-        <div class="section">
-          <h3>Skills</h3>
-          <div class="skill">Languages: <span class="muted">C++, Java, Python, Lua</span></div>
-          <div class="bar" aria-hidden="true" style="margin-top:6px"><i style="width:90%"></i></div>
-
-          <div class="skill" style="margin-top:10px">Frameworks & Tools: <span class="muted">FastAPI, AWS, PostgreSQL</span></div>
-          <div class="bar" aria-hidden="true" style="margin-top:6px"><i style="width:76%"></i></div>
-
-          <div class="skill" style="margin-top:10px">AI & Data: <span class="muted">LLMs, ML, Prompt Engineering</span></div>
-          <div class="bar" aria-hidden="true" style="margin-top:6px"><i style="width:70%"></i></div>
-
-          <div style="height:8px"></div>
-          <div class="skill">Other: <span class="muted">Algorithms, Data Structures, System Design</span></div>
-        </div>
-
-        <div class="section">
-          <h3>Languages</h3>
-          <div class="muted">Georgian — Native</div>
-          <div class="muted">English — C1</div>
-          <div class="muted">German — Conversational</div>
-          <div class="muted">Russian — A2</div>
-        </div>
-
-        <div class="section">
-          <h3>Education</h3>
-          <div class="muted"><strong>Free University of Tbilisi</strong><br>Mathematics & Computer Science, 2024–2028</div>
-          <div style="height:8px"></div>
-          <div class="muted"><strong>Georgian-American School</strong><br>High School (STEM), 2019–2024</div>
-        </div>
-
-        <div class="section">
-          <h3>Achievements</h3>
-          <div class="muted">1st Place — Bank of Georgia STEM Competition</div>
-          <div class="muted">Top Scorer — Unified National Exams (Full Academic Grant)</div>
-          <div class="muted">SAT 1490 — NMSQT 1430</div>
-        </div>
-
-        <div class="section" style="text-align:center;margin-top:12px">
-          <a class="btn" href="Luka_Aladashvili_CV.pdf" download>Download CV</a>
-        </div>
+        </details>
 
       </aside>
 
-      <!-- MAIN -->
-      <main class="main">
-        <section class="hero">
-          <div style="flex:1">
-            <h2>Software Engineer building backend systems & AI tools</h2>
-            <p class="muted">Experienced in backend engineering, system design, LLM applications, and algorithmic problem solving. Passionate about scalable architectures, model deployment, and mentoring teams.</p>
-
-            <div class="cta">
-              <a class="btn" href="https://github.com/llukito" target="_blank" rel="noopener noreferrer">View GitHub</a>
-              <a class="btn secondary" href="https://www.linkedin.com/in/luka-aladashvili/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
-          </div>
+      <main>
+        <section class="section">
+          <h2 class="section-title">About</h2>
+          <p class="lead">Software Engineer experienced in building backend systems, REST APIs, and AI prototypes. I focus on scalable architectures, performant C++ systems, and practical LLM applications. I also mentor teams and contribute to open-source projects.</p>
         </section>
 
-        <div style="height:18px"></div>
+        <section class="section">
+          <h2 class="section-title">Projects</h2>
+          <div class="projects" id="projects">
 
-        <section>
-          <h3 style="margin-bottom:8px">Featured Projects</h3>
-          <div class="featured">
-            <!-- Project 1 -->
-            <article class="card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <strong>Pharma Data Aggregation & Analytics Tool</strong>
-                <span class="meta">Jul 2025</span>
-              </div>
-              <p class="muted">Backend & data engineering solution automating ingestion and normalization of product catalogs. FastAPI service, live FINA API integration, and dashboards for market-share & pricing anomaly detection.</p>
-              <div class="tags">
-                <span class="tag-pill">Python</span>
-                <span class="tag-pill">FastAPI</span>
-                <span class="tag-pill">PostgreSQL</span>
-                <span class="tag-pill">Data Integration</span>
-              </div>
-              <div style="margin-top:auto;display:flex;gap:8px;justify-content:flex-end">
-                <a class="btn secondary" href="https://github.com/llukito/Pharma-Data-Aggregation-Analytics-Platform" target="_blank" rel="noopener noreferrer">View repo</a>
-              </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <strong>Huffman Compressor (XOR password)</strong>
-                <span class="meta">Jul 2025</span>
-              </div>
-              <p class="muted">C++ Huffman encoder with XOR password encryption. Custom priority queue and bit-level I/O for compatibility with Stanford tests and secure compressed files.</p>
-              <div class="tags">
-                <span class="tag-pill">C++</span>
-                <span class="tag-pill">Algorithms</span>
-                <span class="tag-pill">Encryption</span>
-              </div>
-              <div style="margin-top:auto;display:flex;gap:8px;justify-content:flex-end">
-                <a class="btn secondary" href="https://github.com/llukito/HuffmanCompressorEncrypted" target="_blank" rel="noopener noreferrer">View repo</a>
-              </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <strong>RandomWriter — Markov Text Generator</strong>
-                <span class="meta">Jul 2025</span>
-              </div>
-              <p class="muted">C++ program that learns writing styles using Markov chains and generates new text. Supports multiple input styles, custom output lengths, and efficient memory management.</p>
-              <div class="tags">
-                <span class="tag-pill">C++</span>
-                <span class="tag-pill">NLP</span>
-                <span class="tag-pill">Markov</span>
-              </div>
-              <div style="margin-top:auto;display:flex;gap:8px;justify-content:flex-end">
-                <a class="btn secondary" href="https://github.com/llukito/RandomWriter-Markov-Based-Text-Style-Generator" target="_blank" rel="noopener noreferrer">View repo</a>
-              </div>
-            </article>
-
-          </div>
-        </section>
-
-        <section style="margin-top:18px">
-          <h3>Other Projects</h3>
-          <div class="projects-grid">
-            <div class="card">
-              <strong>FaceConnect — Java Mini Social Network</strong>
-              <div class="meta">Jul 2025</div>
-              <p class="muted">Java Swing application with profiles, friend lists, chat and animated themes. Multithreaded animations and in-memory data management.</p>
-              <div class="tags"><span class="tag-pill">Java</span><span class="tag-pill">Swing</span></div>
-              <div style="margin-top:auto;display:flex;justify-content:flex-end"><a class="btn secondary" href="https://github.com/llukito/FaceConnect" target="_blank" rel="noopener noreferrer">View repo</a></div>
+            <!-- Project cards injected / edited manually -->
+            <div class="project-card" data-repo="Pharma-Data-Aggregation-Analytics-Platform" onclick="openModal(event,this)">
+              <div class="title">Pharma Data Aggregation & Analytics Tool</div>
+              <div class="meta">Jul 2025 · Backend, Data Engineering</div>
+              <div class="tag-wrap"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span></div>
             </div>
 
-            <div class="card">
-              <strong>NameViz — Name Trends Visualizer</strong>
-              <div class="meta">Jul 2025</div>
-              <p class="muted">Interactive Java app that visualizes name popularity over decades. Replace dataset to reuse for any time-series analysis.</p>
-              <div class="tags"><span class="tag-pill">Java</span><span class="tag-pill">Data Viz</span></div>
-              <div style="margin-top:auto;display:flex;justify-content:flex-end"><a class="btn secondary" href="https://github.com/llukito/NameViz" target="_blank" rel="noopener noreferrer">View repo</a></div>
+            <div class="project-card" data-repo="HuffmanCompressorEncrypted" onclick="openModal(event,this)">
+              <div class="title">Huffman Compression with XOR Password Encryption</div>
+              <div class="meta">Jul 2025 · C++ Systems</div>
+              <div class="tag-wrap"><span class="tag">C++</span><span class="tag">Algorithms</span><span class="tag">Encryption</span></div>
             </div>
 
-            <div class="card">
-              <strong>Boggle — AI-Powered Game & Solver</strong>
-              <div class="meta">Jul 2025</div>
-              <p class="muted">C++ Boggle implementation with GUI (Stanford libraries) and recursive solver optimized with prefix pruning.</p>
-              <div class="tags"><span class="tag-pill">C++</span><span class="tag-pill">Game Dev</span></div>
-              <div style="margin-top:auto;display:flex;justify-content:flex-end"><a class="btn secondary" href="https://github.com/llukito/Boggle-Game-with-AI-Opponent" target="_blank" rel="noopener noreferrer">View repo</a></div>
+            <div class="project-card" data-repo="RandomWriter-Markov-Based-Text-Style-Generator" onclick="openModal(event,this)">
+              <div class="title">RandomWriter — Markov Text Generator</div>
+              <div class="meta">Jul 2025 · C++ · NLP</div>
+              <div class="tag-wrap"><span class="tag">C++</span><span class="tag">NLP</span><span class="tag">Markov</span></div>
+            </div>
+
+            <div class="project-card" data-repo="FaceConnect" onclick="openModal(event,this)">
+              <div class="title">FaceConnect — Java Mini Social Network</div>
+              <div class="meta">Jul 2025 · Java Swing</div>
+              <div class="tag-wrap"><span class="tag">Java</span><span class="tag">Swing</span></div>
+            </div>
+
+            <div class="project-card" data-repo="NameViz" onclick="openModal(event,this)">
+              <div class="title">NameViz — Name Trends Visualizer</div>
+              <div class="meta">Jul 2025 · Data Visualization</div>
+              <div class="tag-wrap"><span class="tag">Java</span><span class="tag">Data Viz</span></div>
+            </div>
+
+            <div class="project-card" data-repo="Boggle-Game-with-AI-Opponent" onclick="openModal(event,this)">
+              <div class="title">Boggle — AI-Powered Game & Solver</div>
+              <div class="meta">Jul 2025 · C++ · Game Dev</div>
+              <div class="tag-wrap"><span class="tag">C++</span><span class="tag">Game Dev</span></div>
             </div>
 
           </div>
         </section>
 
-        <section style="margin-top:18px">
-          <h3>Experience</h3>
-          <div style="margin-top:8px">
-            <div style="margin-bottom:10px">
-              <strong>Freelance Software Developer</strong> <span class="meta">Remote | 2023 – Present</span>
-              <p class="muted">Design, build, and maintain backend systems using Java, C++, and Python. Developed multithreaded data pipelines, REST APIs, and scalable solutions hosted on AWS.</p>
-            </div>
-
-            <div style="margin-bottom:10px">
-              <strong>Georgian-American School — Technical Program Manager</strong> <span class="meta">Tbilisi | Sep 2022 – Aug 2024</span>
-              <p class="muted">Led student-driven tech initiatives and programming teams for ICYS and IJSO, mentored students in backend systems and algorithms, and coordinated STEM programs.</p>
-            </div>
-
-            <div style="margin-bottom:10px">
-              <strong>Roblox — Game Developer (Self-employed)</strong> <span class="meta">Sep 2024 – May 2025</span>
-              <p class="muted">Built game features with Lua & Luau, focusing on gameplay systems and problem-solving topics for community engagement.</p>
-            </div>
-
-            <div style="margin-bottom:10px">
-              <strong>Georgian AI Association — AI & Data Science Club Member</strong> <span class="meta">Apr 2025 – Present</span>
-              <p class="muted">Working with LLMs, FastAPI-based model serving, and applied AI projects alongside GAIA programs.</p>
-            </div>
-
+        <section class="section">
+          <h2 class="section-title">Experience</h2>
+          <div class="card" style="padding:14px">
+            <strong>Freelance Software Developer</strong> <div class="meta">Remote · 2023 – Present</div>
+            <p class="small" style="margin-top:8px">Design and maintain backend systems (Java, C++, Python). Build REST APIs, data pipelines and microservices on AWS; mentor junior engineers and students.</p>
           </div>
-        </section>
 
-        <section style="margin-top:18px">
-          <h3>Achievements & Certifications</h3>
-          <details>
-            <summary style="font-weight:600;cursor:pointer">Show certificates, scores & awards</summary>
-            <div style="margin-top:10px" class="muted">
-              <ul>
-                <li>Cambridge English: First (FCE) — C1 (Jul 2023)</li>
-                <li>Komarovi STEM Summer Camp — Top performer (Jun 2022)</li>
-                <li>UNDP MUNDP — Delegate (Mar 2022)</li>
-                <li>Coursera: Introduction to Marketing (Dec 2022)</li>
-                <li>SAT 1490 (Mar 2024) · NMSQT 1430 (Nov 2024) · PSAT 1400 (Nov 2024)</li>
-              </ul>
-            </div>
-          </details>
+          <div style="height:10px"></div>
+
+          <div class="card" style="padding:14px">
+            <strong>Technical Program Manager — Georgian-American School</strong> <div class="meta">Tbilisi · Sep 2022 – Aug 2024</div>
+            <p class="small" style="margin-top:8px">Led tech initiatives, coached teams for ICYS/IJSO, organized STEM programs and workshops.</p>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="card" style="padding:14px">
+            <strong>Game Developer — Roblox (Self-employed)</strong> <div class="meta">Sep 2024 – May 2025</div>
+            <p class="small" style="margin-top:8px">Developed gameplay systems using Lua/Luau and collaborated on community-driven experiences.</p>
+          </div>
+
         </section>
 
         <footer>
-          <div>Made with care • Luka Aladashvili</div>
+          <div class="small">Made with care • Luka Aladashvili</div>
         </footer>
-
       </main>
     </div>
   </div>
 
+  <!-- modal -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong id="modalTitle">Project title</strong>
+        <button id="closeModal" class="icon-btn">Close</button>
+      </div>
+      <div class="row">
+        <img id="modalImage" src="assets/projects/placeholder.png" alt="project image" onerror="this.style.display='none'">
+        <div class="desc">
+          <div id="modalMeta" class="small muted">Meta</div>
+          <p id="modalDesc" class="small" style="margin-top:10px">Description goes here.</p>
+          <div id="modalTags" style="margin-top:12px"></div>
+          <div style="margin-top:14px;display:flex;gap:10px">
+            <a id="modalRepo" class="primary-btn" href="#" target="_blank">View repo</a>
+            <a id="modalLive" class="ghost" href="#" target="_blank" style="display:none">Live demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // small accessibility: keyboard focus for details
-    document.querySelectorAll('details').forEach(d => {
-      d.addEventListener('keydown', e => {
-        if(e.key === 'Enter' || e.key === ' ') d.open = !d.open;
-      })
-    })
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved) root.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+      toggle.textContent = cur === 'dark' ? '🌙' : '☀️';
+    });
+
+    // Modal data (project info stored here)
+    const projects = {
+      'Pharma-Data-Aggregation-Analytics-Platform':{
+        title:'Pharma Data Aggregation & Analytics Tool',
+        meta:'Jul 2025 · Python, FastAPI, PostgreSQL',
+        desc:'Built an end-to-end platform automating ingestion & normalization of pharma product catalogs. Integrated FINA API for live data, validation routines, and analytics dashboards for market-share and anomaly detection.',
+        repo:'https://github.com/llukito/Pharma-Data-Aggregation-Analytics-Platform',
+        img:'assets/projects/Pharma-Data-Aggregation-Analytics-Platform.png',
+        tags:['Python','FastAPI','PostgreSQL','Data Integration']
+      },
+      'HuffmanCompressorEncrypted':{
+        title:'Huffman Compressor (XOR password)',
+        meta:'Jul 2025 · C++ · Systems',
+        desc:'C++ Huffman encoder with XOR password encryption, custom priority queues and bit-level IO compatible with Stanford test harness. Focus on security + compression performance.',
+        repo:'https://github.com/llukito/HuffmanCompressorEncrypted',
+        img:'assets/projects/HuffmanCompressorEncrypted.png',
+        tags:['C++','Algorithms','Encryption']
+      },
+      'RandomWriter-Markov-Based-Text-Style-Generator':{
+        title:'RandomWriter — Markov Text Generator',
+        meta:'Jul 2025 · C++ · NLP',
+        desc:'Generative text program using Markov chains allowing style transfer between samples and custom output lengths. Demonstrates dynamic memory management & algorithmic design.',
+        repo:'https://github.com/llukito/RandomWriter-Markov-Based-Text-Style-Generator',
+        img:'assets/projects/RandomWriter-Markov-Based-Text-Style-Generator.png',
+        tags:['C++','NLP','Markov']
+      },
+      'FaceConnect':{
+        title:'FaceConnect — Java Mini Social Network',
+        meta:'Jul 2025 · Java Swing',
+        desc:'Desktop Java Swing app: profiles, friend lists, in-app chat, and animated themes. Multithreaded animation & adaptive canvas.',
+        repo:'https://github.com/llukito/FaceConnect',
+        img:'assets/projects/FaceConnect.png',
+        tags:['Java','Swing']
+      },
+      'NameViz':{
+        title:'NameViz — Name Trends Visualizer',
+        meta:'Jul 2025 · Java · Data Viz',
+        desc:'Interactive application to visualize name popularity across decades with adaptive charts and dataset swap capability.',
+        repo:'https://github.com/llukito/NameViz',
+        img:'assets/projects/NameViz.png',
+        tags:['Java','Data Visualization']
+      },
+      'Boggle-Game-with-AI-Opponent':{
+        title:'Boggle — AI-Powered Game & Solver',
+        meta:'Jul 2025 · C++ · Game Dev',
+        desc:'C++ Boggle with GUI and recursive solver optimized with prefix pruning. Uses Stanford graphics libraries and algorithmic optimization.',
+        repo:'https://github.com/llukito/Boggle-Game-with-AI-Opponent',
+        img:'assets/projects/Boggle-Game-with-AI-Opponent.png',
+        tags:['C++','Game Dev','Algorithms']
+      }
+    };
+
+    // open modal
+    const backdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalTags = document.getElementById('modalTags');
+    const modalRepo = document.getElementById('modalRepo');
+    const modalImage = document.getElementById('modalImage');
+    const modalLive = document.getElementById('modalLive');
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
+
+    function openModal(e,el){
+      const key = el.getAttribute('data-repo');
+      const p = projects[key];
+      if(!p) return;
+      modalTitle.textContent = p.title;
+      modalMeta.textContent = p.meta;
+      modalDesc.textContent = p.desc;
+      modalTags.innerHTML = p.tags.map(t=>`<span class=\"tag\">${t}</span>`).join(' ');
+      modalRepo.href = p.repo;
+      modalImage.src = p.img;
+      modalImage.style.display = 'block';
+      modalImage.onerror = function(){ this.style.display='none'; }
+      backdrop.style.display = 'flex';
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+
+    // accessible keyboard close
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeModal(); });
+
   </script>
 </body>
 </html>
-
