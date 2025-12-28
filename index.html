@@ -524,6 +524,7 @@
         <section class="section">
           <h2 class="section-title">Selected Projects</h2>
           <div class="projects">
+            
             <div class="project-card" data-repo="EcoShield" onclick="openModal(event,this)">
               <div class="title">EcoShield AI Platform</div>
               <div class="meta">React, Node.js, Gemini AI, NASA API</div>
@@ -532,19 +533,19 @@
               </div>
             </div>
 
-            <div class="project-card" data-repo="AI-Financial-Evaluator" onclick="openModal(event,this)">
-              <div class="title">AI Financial Evaluator</div>
-              <div class="meta">Python, FinTech, Valuation Models</div>
+            <div class="project-card" data-repo="fincast-valuation-platform" onclick="openModal(event,this)">
+              <div class="title">Fincast Valuation Platform</div>
+              <div class="meta">Architecture · AI Governance · FinTech</div>
               <div class="tag-wrap">
-                <span class="tag">Python</span><span class="tag">Finance</span>
+                <span class="tag">System Design</span><span class="tag">AI</span><span class="tag">FinTech</span>
               </div>
             </div>
 
             <div class="project-card" data-repo="HuffmanCompressorEncrypted" onclick="openModal(event,this)">
-              <div class="title">Huffman Compressor</div>
-              <div class="meta">C++, Systems, Encryption</div>
+              <div class="title">Huffman Compressor with Encryption</div>
+              <div class="meta">C++ · Systems · Bit-level IO</div>
               <div class="tag-wrap">
-                <span class="tag">Algorithms</span><span class="tag">C++</span>
+                <span class="tag">Algorithms</span><span class="tag">C++</span><span class="tag">Security</span>
               </div>
             </div>
 
@@ -556,19 +557,19 @@
               </div>
             </div>
 
-            <div class="project-card" data-repo="FaceConnect" onclick="openModal(event,this)">
-              <div class="title">FaceConnect Social</div>
-              <div class="meta">Java Swing, Multithreading</div>
+            <div class="project-card" data-repo="multithreaded-banking-system" onclick="openModal(event,this)">
+              <div class="title">Multithreaded Banking System</div>
+              <div class="meta">C · Concurrency · Synchronization</div>
               <div class="tag-wrap">
-                <span class="tag">Java</span><span class="tag">GUI</span>
+                <span class="tag">C</span><span class="tag">Multithreading</span><span class="tag">Mutex</span>
               </div>
             </div>
 
-            <div class="project-card" data-repo="Boggle-Game-with-AI-Opponent" onclick="openModal(event,this)">
-              <div class="title">AI Boggle Solver</div>
-              <div class="meta">C++, Recursion, Optimization</div>
+            <div class="project-card" data-repo="pthread-deadlock-detector" onclick="openModal(event,this)">
+              <div class="title">Pthread Deadlock Detector</div>
+              <div class="meta">C · Systems Programming · LD_PRELOAD</div>
               <div class="tag-wrap">
-                <span class="tag">Game Dev</span><span class="tag">AI</span>
+                <span class="tag">Systems</span><span class="tag">Graph Theory</span>
               </div>
             </div>
 
@@ -609,7 +610,6 @@
   </div>
 
   <script>
-    // DATA: Same project data as before, preserved perfectly.
     const projects = {
       'EcoShield': {
         title: 'EcoShield – AI-Powered Environmental Risk Platform',
@@ -619,8 +619,17 @@
         img: 'assets/projects/EcoShield.png',
         tags: ['React', 'Node.js', 'Gemini AI', 'NASA POWER API', 'OpenRouter']
       },
+      'fincast-valuation-platform': {
+        title: 'Fincast Valuation Platform',
+        meta: 'Overview · Enterprise Architecture · AI Governance',
+        desc: 'FINCAST is an enterprise-grade valuation platform designed to automate, standardize, and audit company valuations. It combines traditional financial valuation engines (DCF, market multiples) with AI-assisted data processing to deliver fast, consistent, and defensible outputs. (Note: High-level technical overview; proprietary source code not disclosed).',
+        repo: 'https://github.com/llukito/fincast-valuation-platform',
+        // Update this image in your assets folder
+        img: 'assets/projects/fincast.png', 
+        tags: ['System Design', 'AI', 'FinTech', 'Governance']
+      },
       'HuffmanCompressorEncrypted':{
-        title:'Huffman Compressor (XOR password)',
+        title:'Huffman Compressor with Encryption',
         meta:'Jul 2025 · C++ · Systems',
         desc:'C++ Huffman encoder with XOR password encryption, custom priority queues and bit-level IO compatible with Stanford test harness. Focus on security + compression performance.',
         repo:'https://github.com/llukito/HuffmanCompressorEncrypted',
@@ -628,36 +637,28 @@
         tags:['C++','Algorithms','Encryption']
       },
       'RandomWriter-Markov-Based-Text-Style-Generator':{
-        title:'RandomWriter - Markov Text Generator',
+        title:'RandomWriter — Markov Text Generator',
         meta:'Jul 2025 · C++ · NLP',
         desc:'Generative text program using Markov chains allowing style transfer between samples and custom output lengths. Demonstrates dynamic memory management & algorithmic design.',
         repo:'https://github.com/llukito/RandomWriter-Markov-Based-Text-Style-Generator',
         img:'assets/projects/RandomWriter-Markov-Based-Text-Style-Generator.png',
         tags:['C++','NLP','Markov']
       },
-      'FaceConnect':{
-        title:'FaceConnect - Java Mini Social Network',
-        meta:'Jul 2025 · Java Swing',
-        desc:'Desktop Java Swing app: profiles, friend lists, in-app chat, and animated themes. Multithreaded animation & adaptive canvas.',
-        repo:'https://github.com/llukito/FaceConnect',
-        img:'assets/projects/FaceConnect.png',
-        tags:['Java','Swing']
+      'multithreaded-banking-system':{
+        title:'Multithreaded Banking System',
+        meta:'C · Concurrency · Synchronization',
+        desc:'A high-concurrency banking simulation implemented in C. This project focuses on solving complex synchronization issues including race conditions, data races, and deadlocks in a shared-memory environment.',
+        repo:'https://github.com/llukito/multithreaded-banking-system',
+        img:'assets/projects/multithreaded-banking-system.png',
+        tags:['C','Multithreading','Mutex','Race Conditions']
       },
-      'AI-Financial-Evaluator':{
-        title:'Financial Evaluator - AI-Powered Valuation',
-        meta:'Sep 2025 · Python · AI · FinTech',
-        desc:'AI agent that ingests company data, removes noise, and computes fast, sourceable valuations for SMEs and large enterprises. Generates editable PDF reports, recommends investment vs. loan strategies with probability estimates. Orchestrates multiple AI models for analysis, denoising, and synthesis.',
-        repo:'https://github.com/llukito/AI-Financial-Evaluator/blob/main/README.md',
-        img:'assets/projects/AI-Financial-Evaluator.png',
-        tags:['Python','FinTech','AI','Valuation']
-      },
-      'Boggle-Game-with-AI-Opponent':{
-        title:'Boggle - AI-Powered Game & Solver',
-        meta:'Jul 2025 · C++ · Game Dev',
-        desc:'C++ Boggle with GUI and recursive solver optimized with prefix pruning. Uses Stanford graphics libraries and algorithmic optimization.',
-        repo:'https://github.com/llukito/Boggle-Game-with-AI-Opponent',
-        img:'assets/projects/Boggle-Game-with-AI-Opponent.png',
-        tags:['C++','Game Dev','Algorithms']
+      'pthread-deadlock-detector':{
+        title:'Pthread Deadlock Detector',
+        meta:'C · Systems Programming · LD_PRELOAD',
+        desc:'A dynamic deadlock detection runtime library for multi-threaded C programs. It intercepts pthread mutex calls via LD_PRELOAD, tracks lock ownership, builds a wait-for graph, and detects cycles (deadlocks) in real-time. Displays cycle paths and mutex ownership states.',
+        repo:'https://github.com/llukito/pthread-deadlock-detector',
+        img:'assets/projects/pthread-deadlock-detector.png',
+        tags:['C','Systems','Graph Theory','LD_PRELOAD']
       }
     };
 
@@ -710,7 +711,3 @@
   </script>
 </body>
 </html>
-
-
-
-
